@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">Story App</string>
+
+
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="email_id">Email ID</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="register">Sign up</string>
+    <string name="your_name">Your Name</string>
+    <string name="add_your_story">add your story</string>
+    <string name="camera">Camera</string>
+    <string name="gallery">Gallery</string>
+    <string name="Upload">Upload</string>
+    <string name="Password_Error">"Min character length is"</string>
+    <string name="Email_Error">"Email format is not valid"</string>
+    <string name="rejected_permission">"Didn't get permission"</string>
+    <string name="camera_failed">"Camera failed"</string>
+    <string name="insert_image">"Please insert the file / description"</string>
+    <string name="choose_picture">"Choose a picture"</string>
+    <string name="logout">Logout</string>
+    <string name="empty_data">Data is empty</string>
+    <string name="appwidget_text">EXAMPLE</string>
+    <string name="add_widget">Add widget</string>
+    <string name="app_widget_description">This is an app widget description</string>
+</resources>

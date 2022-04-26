@@ -1,0 +1,24 @@
+<resources>
+    <string name="app_name">Story App</string>
+
+
+    <string name="login">Masuk</string>
+    <string name="password">Kata Sandi</string>
+    <string name="email_id">Email ID</string>
+    <string name="sign_up">Daftar</string>
+    <string name="don_t_have_an_account">Tidak Punya Akun?</string>
+    <string name="register">Daftar</string>
+    <string name="your_name">Nama Kamu</string>
+    <string name="add_your_story">Tambah Cerita Mu</string>
+    <string name="camera">Kamera</string>
+    <string name="gallery">Galeri</string>
+    <string name="Upload">Unggah</string>
+    <string name="Password_Error">"Minimum panjang karakter adalah"</string>
+    <string name="Email_Error">"Format email tidak valid"</string>
+    <string name="rejected_permission">"Tidak Mendapat Izin"</string>
+    <string name="camera_failed">"Kamera Gagak"</string>
+    <string name="insert_image">"Mohon masukkan file / deskripsi"</string>
+    <string name="choose_picture">"Pilih gambar"</string>
+    <string name="logout">Keluar</string>
+    <string name="empty_data">Data kosong</string>
+</resources>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Bangkit2022/6_Belajar_Pengembangan_Aplikasi_Android_Intermediate/6_Subimission/temp1/app/src/main/res/drawable/ic_add.xml" value="0.3625" />
+        <entry key="..\:/Bangkit2022/6_Belajar_Pengembangan_Aplikasi_Android_Intermediate/6_Subimission/temp1/app/src/main/res/drawable/ic_switch_camera.xml" value="0.2415" />
+        <entry key="..\:/Bangkit2022/6_Belajar_Pengembangan_Aplikasi_Android_Intermediate/6_Subimission/temp1/app/src/main/res/drawable/text_cursor.xml" value="0.2415" />
+        <entry key="..\:/Bangkit2022/6_Belajar_Pengembangan_Aplikasi_Android_Intermediate/6_Subimission/temp1/app/src/main/res/layout/activity_add_story.xml" value="0.25" />
+        <entry key="..\:/Bangkit2022/6_Belajar_Pengembangan_Aplikasi_Android_Intermediate/6_Subimission/temp1/app/src/main/res/layout/activity_camera.xml" value="0.33" />
+        <entry key="..\:/Bangkit2022/6_Belajar_Pengembangan_Aplikasi_Android_Intermediate/6_Subimission/temp1/app/src/main/res/layout/activity_detail.xml" value="0.26623931623931624" />
+        <entry key="..\:/Bangkit2022/6_Belajar_Pengembangan_Aplikasi_Android_Intermediate/6_Subimission/temp1/app/src/main/res/layout/activity_main.xml" value="0.5703125" />
+        <entry key="..\:/Bangkit2022/6_Belajar_Pengembangan_Aplikasi_Android_Intermediate/6_Subimission/temp1/app/src/main/res/layout/activity_setting.xml" value="0.26849080803762293" />
+        <entry key="..\:/Bangkit2022/6_Belajar_Pengembangan_Aplikasi_Android_Intermediate/6_Subimission/temp1/app/src/main/res/layout/fragment_login.xml" value="0.33" />
+        <entry key="..\:/Bangkit2022/6_Belajar_Pengembangan_Aplikasi_Android_Intermediate/6_Subimission/temp1/app/src/main/res/layout/fragment_register.xml" value="0.25" />
+        <entry key="..\:/Bangkit2022/6_Belajar_Pengembangan_Aplikasi_Android_Intermediate/6_Subimission/temp1/app/src/main/res/layout/fragment_story_timeline.xml" value="0.33" />
+        <entry key="..\:/Bangkit2022/6_Belajar_Pengembangan_Aplikasi_Android_Intermediate/6_Subimission/temp1/app/src/main/res/layout/story_image_widget.xml" value="0.18" />
+        <entry key="..\:/Bangkit2022/6_Belajar_Pengembangan_Aplikasi_Android_Intermediate/6_Subimission/temp1/app/src/main/res/layout/story_item.xml" value="0.5" />
+        <entry key="..\:/Bangkit2022/6_Belajar_Pengembangan_Aplikasi_Android_Intermediate/6_Subimission/temp1/app/src/main/res/layout/widget_item.xml" value="0.26934587430525864" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+</project>
