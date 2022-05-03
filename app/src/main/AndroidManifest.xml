@@ -20,6 +20,13 @@
         android:theme="@style/Theme.StoryApp">
 
 
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyDDwA6AHdcGyFjU9tmu5xFp_rc81ckfdcE" />
+
+        <activity
+            android:name=".ui.storieslocation.StoryMapActivity"
+            android:exported="false" />
         <activity
             android:name=".ui.settingactivity.SettingActivity"
             android:exported="false" />

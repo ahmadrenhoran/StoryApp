@@ -14,6 +14,7 @@ import com.shp.storyapp.data.model.DataStory
 import com.shp.storyapp.databinding.FragmentStoryTimelineBinding
 import com.shp.storyapp.ui.addstory.AddStoryActivity
 import com.shp.storyapp.ui.settingactivity.SettingActivity
+import com.shp.storyapp.ui.storieslocation.StoryMapActivity
 import com.shp.storyapp.utils.Resource
 
 class StoryTimelineFragment : Fragment() {
@@ -47,14 +48,19 @@ class StoryTimelineFragment : Fragment() {
             val intent = Intent(requireContext(), SettingActivity::class.java)
             startActivity(intent)
         }
+
+        binding.toolbarMap.setOnClickListener {
+            val intent = Intent(requireContext(), StoryMapActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun setupViewModel() {
         storyTLviewModel = ViewModelProvider(this)[StoryTimelineViewModel::class.java]
         storyTLviewModel.getToken().observe(viewLifecycleOwner) { token ->
             Log.d("BAUD", "setupViewModel: $token")
-            storyTLviewModel.getListStory(token).observe(viewLifecycleOwner) { resouce ->
-                when(resouce) {
+            storyTLviewModel.getListStory(token).observe(viewLifecycleOwner) { resource ->
+                when(resource) {
                     is Resource.Loading -> {
                         binding.progressBar.visibility = View.VISIBLE
                         binding.rvListStory.visibility = View.GONE
@@ -62,17 +68,17 @@ class StoryTimelineFragment : Fragment() {
                     is Resource.Success -> {
                         binding.progressBar.visibility = View.GONE
                         binding.rvListStory.visibility = View.VISIBLE
-                        if (resouce.data.listStory.isEmpty()) {
+                        if (resource.data.listStory.isEmpty()) {
                             Toast.makeText(requireContext(), resources.getString(R.string.empty_data), Toast.LENGTH_LONG).show()
                         } else {
-                            setupList(resouce.data.listStory)
+                            setupList(resource.data.listStory)
                         }
                     }
                     is Resource.Error -> {
                         binding.progressBar.visibility = View.GONE
                         binding.rvListStory.visibility = View.GONE
-                        Log.d("BAUD", "setupViewModel: $resouce.error")
-                        Toast.makeText(requireContext(), resouce.error, Toast.LENGTH_LONG).show()
+                        Log.d("BAUD", "setupViewModel: $resource.error")
+                        Toast.makeText(requireContext(), resource.error, Toast.LENGTH_LONG).show()
                     }
                 }
 

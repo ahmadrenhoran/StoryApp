@@ -22,6 +22,9 @@ interface StoryApiService {
     @GET("stories")
     suspend fun getAllStories(@Header("Authorization") token: String): AllStoriesResponse
 
+    @GET("stories?location=1")
+    suspend fun getAllStoriesWithLocation(@Header("Authorization") token: String): AllStoriesResponse
+
 
     @Multipart
     @POST("stories")

@@ -27,6 +27,15 @@ class StoryRepository {
         }
     }
 
+    fun getAllStoriesWithLocation(token: String): LiveData<Resource<AllStoriesResponse>> = liveData {
+        emit(Resource.Loading)
+        try {
+            emit(Resource.Success(AppModule.getStoryApiService().getAllStories("Bearer $token")))
+        } catch (exception: Exception) {
+            emit(Resource.Error(exception.message.toString()))
+        }
+    }
+
     fun uploadStory(
         token: String, @Part file: MultipartBody.Part,
         @Part("description") description: RequestBody

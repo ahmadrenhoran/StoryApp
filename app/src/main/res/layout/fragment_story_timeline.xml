@@ -27,12 +27,24 @@
             android:textColor="@color/white"
             android:text="Story"/>
 
+
         <ImageView
             android:id="@+id/toolbar_title"
-            android:layout_width="100dp"
+            android:layout_marginEnd="16dp"
+            android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_gravity="end"
             android:src="@drawable/ic_baseline_settings_24" />
+
+        <ImageView
+            android:id="@+id/toolbar_map"
+            android:layout_width="wrap_content"
+            android:layout_marginRight="16dp"
+            android:layout_height="30dp"
+            android:layout_gravity="end"
+            android:src="@drawable/ic_location" />
+
+
     </androidx.appcompat.widget.Toolbar>
 
 
