@@ -64,10 +64,10 @@ class AddStoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         setupPermission()
         setupViewModel()
         setupAction()
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
     }
 
     private fun setupViewModel() {
