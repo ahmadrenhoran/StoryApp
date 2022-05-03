@@ -11,8 +11,10 @@ class AddStoryViewModel : ViewModel() {
 
     fun uploadStory(
         token: String, @Part file: MultipartBody.Part,
-        @Part("description") description: RequestBody
-    ) = StoryRepository.getInstance().uploadStory(token, file, description)
+        @Part("description") description: RequestBody,
+        @Part("lat") lat: Double?,
+        @Part("lon") lon: Double?
+    ) = StoryRepository.getInstance().uploadStory(token, file, description, lat, lon)
 
     fun getToken() = StoryRepository.getInstance().getSessionPreference().getToken().asLiveData()
 }

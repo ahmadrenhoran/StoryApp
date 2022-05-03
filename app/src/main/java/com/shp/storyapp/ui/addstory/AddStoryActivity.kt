@@ -15,6 +15,8 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import com.shp.storyapp.R
 import com.shp.storyapp.databinding.ActivityAddStoryBinding
 import com.shp.storyapp.ui.cameraactivity.CameraActivity
@@ -38,6 +40,9 @@ class AddStoryActivity : AppCompatActivity() {
     }
     private lateinit var addStoryViewModel: AddStoryViewModel
     private var getFile: File? = null
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
+    private var lat: Double? = null
+    private var lon: Double? = null
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -62,6 +67,7 @@ class AddStoryActivity : AppCompatActivity() {
         setupPermission()
         setupViewModel()
         setupAction()
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
     }
 
     private fun setupViewModel() {
@@ -86,8 +92,8 @@ class AddStoryActivity : AppCompatActivity() {
             )
 
             addStoryViewModel.getToken().observe(this) {
-                addStoryViewModel.uploadStory(it, imageMultipart, description).observe(this) { resouce ->
-                    when(resouce) {
+                addStoryViewModel.uploadStory(it, imageMultipart, description, lat, lon).observe(this) { resource ->
+                    when(resource) {
                         is Resource.Loading -> {
                             binding.progressBar.visibility = View.VISIBLE
                             binding.addStoryLayout.visibility = View.GONE
@@ -95,13 +101,13 @@ class AddStoryActivity : AppCompatActivity() {
                         is Resource.Success -> {
                             binding.progressBar.visibility = View.GONE
                             binding.addStoryLayout.visibility = View.VISIBLE
-                            Toast.makeText(this@AddStoryActivity, resouce.data.message, Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@AddStoryActivity, resource.data.message, Toast.LENGTH_LONG).show()
                             finish()
                         }
                         is Resource.Error -> {
                             binding.progressBar.visibility = View.GONE
                             binding.addStoryLayout.visibility = View.GONE
-                            Toast.makeText(this@AddStoryActivity, resouce.error, Toast.LENGTH_LONG).show()
+                            Toast.makeText(this@AddStoryActivity, resource.error, Toast.LENGTH_LONG).show()
                         }
                     }
                 }
@@ -158,6 +164,7 @@ class AddStoryActivity : AppCompatActivity() {
 
 
     private fun setupPermission() {
+        getMyLastLocation()
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
         }
@@ -167,10 +174,55 @@ class AddStoryActivity : AppCompatActivity() {
         ContextCompat.checkSelfPermission(baseContext, it) == PackageManager.PERMISSION_GRANTED
     }
 
+    private fun checkPermission(permission: String): Boolean {
+        return ContextCompat.checkSelfPermission(
+            this,
+            permission
+        ) == PackageManager.PERMISSION_GRANTED
+    }
+
+    private val requestPermissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
+            when {
+                permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false -> {
+                    getMyLastLocation()
+                }
+                permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> {
+                    getMyLastLocation()
+                }
+                else -> {
+                    // do nothing.
+                }
+            }
+        }
+
+    private fun getMyLastLocation() {
+        if (checkPermission(Manifest.permission.ACCESS_FINE_LOCATION) &&
+            checkPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+        ) {
+            fusedLocationClient.lastLocation.addOnSuccessListener { location ->
+                if (location != null) {
+                    lat = location.latitude
+                    lon = location.latitude
+                }
+
+            }
+        } else {
+            requestPermissionLauncher.launch(
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+            )
+        }
+    }
+
 
     companion object {
         const val CAMERA_X_RESULT = 20
-        val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA)
+        val REQUIRED_PERMISSIONS = arrayOf(Manifest.permission.CAMERA, Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_FINE_LOCATION)
         const val REQUEST_CODE_PERMISSIONS = 10
     }
 }

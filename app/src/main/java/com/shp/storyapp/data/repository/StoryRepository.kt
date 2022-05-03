@@ -38,11 +38,13 @@ class StoryRepository {
 
     fun uploadStory(
         token: String, @Part file: MultipartBody.Part,
-        @Part("description") description: RequestBody
+        @Part("description") description: RequestBody,
+        @Part("lat") lat: Double?,
+        @Part("lon") lon: Double?
     ): LiveData<Resource<NewStoryResponse>> = liveData {
         emit(Resource.Loading)
         try {
-            emit(Resource.Success(AppModule.getStoryApiService().addNewStory("Bearer $token", file, description)))
+            emit(Resource.Success(AppModule.getStoryApiService().addNewStory("Bearer $token", file, description, lat, lon)))
         } catch (exception: Exception) {
             emit(Resource.Error(exception.message.toString()))
         }
