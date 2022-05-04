@@ -63,6 +63,11 @@ class StoryTimelineFragment : Fragment() {
         }
     }
 
+    override fun onResume() {
+        super.onResume()
+        getData()
+    }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

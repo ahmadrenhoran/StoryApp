@@ -164,10 +164,10 @@ class AddStoryActivity : AppCompatActivity() {
 
 
     private fun setupPermission() {
-        getMyLastLocation()
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
         }
+        getMyLastLocation()
     }
 
     private fun allPermissionsGranted() = REQUIRED_PERMISSIONS.all {
