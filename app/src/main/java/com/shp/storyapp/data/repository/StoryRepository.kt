@@ -3,7 +3,13 @@ package com.shp.storyapp.data.repository
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.liveData
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.liveData
+import com.shp.storyapp.data.model.DataStory
 import com.shp.storyapp.data.model.SessionPreference
+import com.shp.storyapp.data.remote.StoriesPagingSource
 import com.shp.storyapp.data.remote.response.AllStoriesResponse
 import com.shp.storyapp.data.remote.response.NewStoryResponse
 import com.shp.storyapp.di.AppModule
@@ -17,7 +23,16 @@ class StoryRepository {
 
     fun getSessionPreference() = SessionPreference.getInstance()
 
-
+    fun getStories(token: String): LiveData<PagingData<DataStory>> {
+        return Pager(
+            config = PagingConfig(
+                pageSize = 5
+            ),
+            pagingSourceFactory = {
+                StoriesPagingSource(AppModule.getStoryApiService(), token)
+            }
+        ).liveData
+    }
     fun getAllStories(token: String): LiveData<Resource<AllStoriesResponse>> = liveData {
         emit(Resource.Loading)
         try {
@@ -30,7 +45,7 @@ class StoryRepository {
     fun getAllStoriesWithLocation(token: String): LiveData<Resource<AllStoriesResponse>> = liveData {
         emit(Resource.Loading)
         try {
-            emit(Resource.Success(AppModule.getStoryApiService().getAllStories("Bearer $token")))
+            emit(Resource.Success(AppModule.getStoryApiService().getAllStoriesWithLocation("Bearer $token")))
         } catch (exception: Exception) {
             emit(Resource.Error(exception.message.toString()))
         }
