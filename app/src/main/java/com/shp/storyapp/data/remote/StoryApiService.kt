@@ -1,5 +1,6 @@
 package com.shp.storyapp.data.remote
 
+import com.shp.storyapp.data.model.DataStory
 import com.shp.storyapp.data.model.LoginCredential
 import com.shp.storyapp.data.model.User
 import com.shp.storyapp.data.remote.response.AllStoriesResponse
@@ -20,7 +21,16 @@ interface StoryApiService {
     suspend fun login(@Body loginCredential: LoginCredential): LoginResponse
 
     @GET("stories")
-    suspend fun getAllStories(@Header("Authorization") token: String): AllStoriesResponse
+    suspend fun getAllStories(
+        @Header("Authorization") token: String,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): AllStoriesResponse
+
+    @GET("stories")
+    suspend fun getAllStories(
+        @Header("Authorization") token: String
+    ): AllStoriesResponse
 
     @GET("stories?location=1")
     suspend fun getAllStoriesWithLocation(@Header("Authorization") token: String): AllStoriesResponse

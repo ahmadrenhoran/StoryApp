@@ -2,18 +2,21 @@ package com.shp.storyapp.ui.storytimeline
 
 import android.app.Activity
 import android.content.Intent
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.app.ActivityOptionsCompat
 import androidx.core.util.Pair
+import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.shp.storyapp.data.model.DataStory
 import com.shp.storyapp.databinding.StoryItemBinding
 import com.shp.storyapp.ui.detailstory.DetailActivity
 
-class StoryTimelineAdapter(private val listStory: List<DataStory>) :
-    RecyclerView.Adapter<StoryTimelineAdapter.ViewHolder>() {
+class StoryTimelineAdapter() :
+    PagingDataAdapter<DataStory, StoryTimelineAdapter.ViewHolder>(DIFF_CALLBACK) {
 
     class ViewHolder (var binding: StoryItemBinding) : RecyclerView.ViewHolder(binding.root)
 
@@ -21,11 +24,12 @@ class StoryTimelineAdapter(private val listStory: List<DataStory>) :
         LayoutInflater.from(parent.context), parent, false))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val story: DataStory = listStory[position]
+        Log.d("HAHA", "onBindViewHolder: ${getItem(position)}")
+        val story: DataStory? = getItem(position)
         holder.apply {
-            Glide.with(itemView.context).load(story.photoUrl).into(binding.storyImage)
-            binding.storyUserName.text = story.name
-            binding.storyUploadDate.text = story.createdAt
+            Glide.with(itemView.context).load(story?.photoUrl).into(binding.storyImage)
+            binding.storyUserName.text = story?.name
+            binding.storyUploadDate.text = story?.createdAt
 
             itemView.setOnClickListener {
                 val intent = Intent(itemView.context, DetailActivity::class.java)
@@ -44,5 +48,15 @@ class StoryTimelineAdapter(private val listStory: List<DataStory>) :
 
     }
 
-    override fun getItemCount(): Int = listStory.size
+    companion object {
+        private val DIFF_CALLBACK = object : DiffUtil.ItemCallback<DataStory>() {
+            override fun areItemsTheSame(oldItem: DataStory, newItem: DataStory): Boolean {
+                return oldItem == newItem
+            }
+
+            override fun areContentsTheSame(oldItem: DataStory, newItem: DataStory): Boolean {
+                return oldItem.id == newItem.id
+            }
+        }
+    }
 }
